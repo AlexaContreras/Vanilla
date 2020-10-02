@@ -51,17 +51,18 @@ var isOpen = false;
  */
 function createOffsetClones(target, numberOfClones) {
   let createdElements = [];
-  for (let index = 0; index < numberOfClones; index++) {
-    // const div = document.createElement('div');
-    // div.classList.add(`box${index + 1}`);
-    // console.log(div);
 
+  for (let index = 0; index < numberOfClones; index++) {
+    //cloning the target
     const element = target;
     const cloned = element.cloneNode(true);
-    cloned.style.marginTop = `${margin}px`;
+
+    //styling clones
     cloned.style.backgroundColor = `#${palette[index]}`;
+    cloned.style.zIndex = `${numberOfClones - 1}`;
+
+    // adding clone to createdElements array
     createdElements.push(cloned);
-    console.log(cloned);
   }
 
   return createdElements;
@@ -71,18 +72,43 @@ function createOffsetClones(target, numberOfClones) {
  * The function to execute when the container is clicked. This should trigger the transition of the clones!
  * @param {MouseEvent} event
  */
-function click(e) {
-  console.log(e.target.parentElement);
-}
 
 // container element reference. This should be clicked.
 container = document.querySelector('.container');
 // box element reference. This should be cloned.
 box = document.querySelector('.box');
 
-elems = createOffsetClones(box, 12);
+// calling the function to create clones
+elems = createOffsetClones(box, 3);
 elems.forEach((element) => {
+  // elements added to container
   container.appendChild(element);
 });
-container.addEventListener('click', click);
 
+// container click function
+function click(e) {
+  let index = 152;
+
+  if (isOpen) {
+    // styles to close clones
+    elems.forEach((element) => {
+      element.style.transform = null;
+      element.style.marginTop = null;
+    });
+    isOpen = false;
+  } else {
+    // styles to open clones
+    elems.forEach((element) => {
+      element.style.transform = `translateY(${index}px)`;
+      element.style.marginTop = `${margin}px`;
+
+      index = index + 162;
+    });
+
+    isOpen = true;
+  }
+}
+
+// adding event listener to container
+
+container.addEventListener('click', click);
