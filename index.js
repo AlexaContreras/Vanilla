@@ -51,14 +51,27 @@ var isOpen = false;
  */
 function createOffsetClones(target, numberOfClones) {
   let createdElements = [];
+  let counter = 0;
 
   for (let index = 0; index < numberOfClones; index++) {
     //cloning the target
     const element = target;
     const cloned = element.cloneNode(true);
 
+    //Setting counter to style de background
+
+    if (index <= 2) {
+      counter = index;
+    } else {
+      if (counter == 2) {
+        counter = 0;
+      } else {
+        counter++;
+      }
+    }
+
     //styling clones
-    cloned.style.backgroundColor = `#${palette[index]}`;
+    cloned.style.backgroundColor = `#${palette[counter]}`;
     cloned.style.zIndex = `${numberOfClones - 1}`;
 
     // adding clone to createdElements array
@@ -79,7 +92,7 @@ container = document.querySelector('.container');
 box = document.querySelector('.box');
 
 // calling the function to create clones
-elems = createOffsetClones(box, 3);
+elems = createOffsetClones(box, 12);
 elems.forEach((element) => {
   // elements added to container
   container.appendChild(element);
