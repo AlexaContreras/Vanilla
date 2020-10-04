@@ -58,7 +58,7 @@ function createOffsetClones(target, numberOfClones) {
     const element = target;
     const cloned = element.cloneNode(true);
 
-    //Setting counter to style to background replace for module operator
+    //Setting counter to style to background replaced with module operator
     /*   if (index <= palette.length) {
       counter = index;
     } else {
