@@ -35,7 +35,7 @@ Tips:
 // Deleting this line = cheating.
 'use strict';
 
-const palette = ['F38785', 'C9CBA6', 'EA4A66'];
+const palette = ['F38785', 'C9CBA6', 'EA4A66', 'F0E68C'];
 const margin = 10;
 
 var container;
@@ -58,20 +58,26 @@ function createOffsetClones(target, numberOfClones) {
     const element = target;
     const cloned = element.cloneNode(true);
 
-    //Setting counter to style de background
-
-    if (index <= 2) {
+    //Setting counter to style to background replace for module operator
+    /*   if (index <= palette.length) {
       counter = index;
     } else {
-      if (counter == 2) {
+      if (counter == palette.length) {
         counter = 0;
       } else {
         counter++;
       }
     }
 
-    //styling clones
+
+    This also works fine
     cloned.style.backgroundColor = `#${palette[counter]}`;
+ */
+
+    //styling clones
+
+    cloned.style.backgroundColor = `#${palette[index % palette.length]}`;
+    console.log(index % palette.length, index, palette.length);
     cloned.style.zIndex = `${numberOfClones - 1}`;
 
     // adding clone to createdElements array
